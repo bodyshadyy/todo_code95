@@ -14,6 +14,13 @@ Route::get('/dashboard', function () {
     ]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::get('/lists', function () {
+    return view('lists', [
+        'todolists' => auth()->user()->toDoLists
+    ]);
+})->middleware(['auth', 'verified'])->name('lists');
+
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
