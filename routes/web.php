@@ -8,8 +8,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard', [
+Route::get('/list', function () {
+    return view('list', [
         'todolists' => auth()->user()->toDoLists
     ]);
 })->middleware(['auth', 'verified'])->name('dashboard');

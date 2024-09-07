@@ -31,6 +31,15 @@
                                 <td class="border px-4 py-2">{{ $todolist->description }}</td>
                                 <td class="border px-4 py-2">{{ $todolist->completed }}</td>
                                 <td class="border px-4 py-2">{{ $todolist->created_at }}</td>
+                                <td class="border px-4 py-2 text-blue-600">   
+     <form action="/dashboard" method="POST">
+        @csrf
+        <input type="hidden" name="task" value="{{ $todolist }}">
+        <button type="submit" class="text-blue-500  bg-transparent border-none p-0 hover:text-blue-700 cursor-pointer">
+            Edit
+        </button>
+    </form>
+</td>
                                 
                             </tr>
                            

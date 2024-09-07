@@ -2,6 +2,7 @@
     <div class="flex flex-col items-center justify-center min-h-screen bg-green">
         <div class="bg-green p-6 rounded-lg shadow-lg">
             <h1 class="text-2xl font-bold mb-4">Pomodoro Timer</h1>
+            <div id="pomodoro-count" class="text-xl font-mono mb-4">Pomodoros: 0</div>
             <div id="timer" class="text-4xl font-mono mb-4">25:00</div>
             <div class="flex space-x-4">
                 <button id="start" class="bg-green-600 p-5 text-black px-4 py-2 rounded hover:bg-green-600">Start</button>
@@ -17,12 +18,15 @@
     <script>
         document.addEventListener('DOMContentLoaded', (event) => {
             let timer;
+            let pomodoros = 0;
             let isRunning = false;
-            let isPaused = false;
-            let timeLeft = 25 * 60; // 25 minutes in seconds
+            let isPaused = false
+            let workTime=25*60
+            let= // 25 minutes in seconds
             let currentMode = 'work'; // 'work', 'short-break', 'long-break'
 
             const timerDisplay = document.getElementById('timer');
+            const pomodoroCountDisplay = document.getElementById('pomodoro-count');
             const startButton = document.getElementById('start');
             const pauseButton = document.getElementById('pause');
             const resetButton = document.getElementById('reset');
@@ -36,6 +40,10 @@
                 timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
             }
 
+            function updatePomodoroCountDisplay() {
+                pomodoroCountDisplay.textContent = `Pomodoros: ${pomodoros}`;
+            }
+
             function startTimer() {
                 if (isRunning) return;
                 isRunning = true;
@@ -44,6 +52,10 @@
                     if (timeLeft <= 0) {
                         clearInterval(timer);
                         isRunning = false;
+                        if (currentMode === 'work') {
+                            pomodoros++;
+                            updatePomodoroCountDisplay();
+                        }
                         switchMode();
                     } else {
                         timeLeft--;
@@ -113,6 +125,7 @@
             finishButton.addEventListener('click', finishPomodoro);
 
             updateTimerDisplay();
+            updatePomodoroCountDisplay();
         });
     </script>
 </x-app-layout>
