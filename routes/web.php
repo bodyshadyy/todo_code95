@@ -14,6 +14,9 @@ Route::get('/dashboard', function () {
     ]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::get('/pomodoro', function () {
+    return view('pomodoro');
+})->middleware(['auth', 'verified'])->name('pomodora');
 Route::get('/lists', function () {
     return view('lists', [
         'todolists' => auth()->user()->toDoLists
