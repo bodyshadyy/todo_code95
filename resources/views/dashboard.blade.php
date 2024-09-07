@@ -13,9 +13,12 @@
                     <h1 class="text-3xl font-bold">Welcome to your dashboard</h1>
 
 
-                @foreach ($todolists as $todo)
-                    <p>{{ $todo->id }}</p>
-                @endforeach
+
+                    @foreach ($todolists[0]->tasks as $todolist)
+                        <x-task-label :id="$todolist->id" :name="$todolist->name" :completed="$todolist->completed" />
+                    @endforeach
+                <x-task-form></x-task-form>
+                <x-form-error name="name"></x-form-error>
                 </div>
             </div>
         </div>

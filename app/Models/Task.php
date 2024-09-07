@@ -7,5 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Task extends Model
 {
+    protected $guarded = [];
     use HasFactory;
+    public function toDoList(){
+        return $this->belongsTo(ToDoList::class);
+    }
 }

@@ -6,6 +6,7 @@ use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\ToDoList;
+use App\Models\Task;
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -16,6 +17,9 @@ class DatabaseSeeder extends Seeder
         // User::factory(10)->create();
         ToDoList::factory(2)->create([
             'user_id' => 1,
+        ]);
+        Task::factory(5)->create([
+            'to_do_list_id' => 1,
         ]);
 
         // User::factory()->create([

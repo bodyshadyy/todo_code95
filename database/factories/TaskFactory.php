@@ -17,7 +17,9 @@ class TaskFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'name' => $this->faker->sentence,
+            'completed' => FALSE,
+            'to_do_list_id' => 1,
         ];
     }
 }
