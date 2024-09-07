@@ -18,7 +18,7 @@
                         <x-task-label :id="$todolist->id" :name="$todolist->name" :completed="$todolist->completed" />
                     @endforeach
                 <x-task-form></x-task-form>
-                <x-form-error name="name"></x-form-error>
+
                 </div>
             </div>
         </div>

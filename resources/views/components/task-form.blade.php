@@ -1,7 +1,12 @@
-<div>
-    <form action"/dashboard" method="POST">
+<div>     
+    <form class="flex items-center" action"/dashboard" method="POST">
         @csrf
-        <input type="text" name="name" placeholder="Enter task name">
-        <button type="submit">Create Task</button>
+       
+         <x-form-input name="name" id="name" placeholder="hello"/>
+           
+        <x-form-button>add</x-form-button>
+        <x-form-error name="name"></x-form-error>
+        
+
     </form>
 </div> 
