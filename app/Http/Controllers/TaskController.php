@@ -7,69 +7,42 @@ use Illuminate\Http\Request;
 
 class TaskController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    // Show all tasks
     public function index()
     {
-        //
+        $tasks = Task::all();
+        return view('tasks.index', compact('tasks'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
+    // Store a new task
     public function store(Request $request)
     {
-      
-        request()->validate([
-            'name' => ['required', 'string', 'max:50','min:3'],
-        ]);
-        task::create([
-            'name' => request()->name,
-            'to_do_list_id' =>1,
+        $request->validate([
+            'name' => 'required',
         ]);
 
-        return back();
-            
+        Task::create([
+            'name' => $request->name,
+        ]);
+
+        return redirect()->route('tasks.index');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Task $task)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Task $task)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
+    // Mark a task as completed
     public function update(Request $request, Task $task)
     {
-        //
+        $completed = $request->input('completed') == '1';
+
+        $task->update(['completed' => $completed]);
+    
+        return redirect()->route('tasks.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+    // Delete a task
     public function destroy(Task $task)
     {
-        //
+        $task->delete();
+
+        return redirect()->route('tasks.index');
     }
 }
