@@ -10,7 +10,7 @@ class TaskController extends Controller
     // Show all tasks
     public function index()
     {
-        $tasks = Task::all();
+        $tasks= auth()->user()->toDoLists[0]->tasks;
         return view('tasks.index', compact('tasks'));
     }
 
@@ -23,6 +23,7 @@ class TaskController extends Controller
 
         Task::create([
             'name' => $request->name,
+            'to_do_list_id' => 1,
         ]);
 
         return redirect()->route('tasks.index');
@@ -38,7 +39,6 @@ class TaskController extends Controller
         return redirect()->route('tasks.index');
     }
 
-    // Delete a task
     public function destroy(Task $task)
     {
         $task->delete();

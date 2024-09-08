@@ -26,15 +26,15 @@
                             @foreach ($todolists as $todolist)
                             
                             <tr>
-                                <a href="/dashboard">
-                                <td class="border px-4 py-2"><a href="/dashboard">{{ $todolist->name }} </a></td>
+                                <td class="border px-4 py-2"><a href="/tasks">{{ $todolist->name }} </a></td>
                                 <td class="border px-4 py-2">{{ $todolist->description }}</td>
                                 <td class="border px-4 py-2">{{ $todolist->completed }}</td>
                                 <td class="border px-4 py-2">{{ $todolist->created_at }}</td>
                                 <td class="border px-4 py-2 text-blue-600">   
-     <form action="/dashboard" method="POST">
+     <form action="{{ route('lists.destroy',  $todolist) }}" method="POST">
         @csrf
-        <input type="hidden" name="task" value="{{ $todolist }}">
+        @method('patch')
+        
         <button type="submit" class="text-blue-500  bg-transparent border-none p-0 hover:text-blue-700 cursor-pointer">
             Edit
         </button>
