@@ -1,24 +1,24 @@
-@extends('layouts.app')
+<x-app-layout>
+    <div class="container mx-auto p-4">
+        <h1 class="text-2xl font-bold mb-4">Edit List</h1>
 
-@section('content')
-    <div class="container">
-        <h1>Edit List</h1>
-
-        <form action="{{ route('lists.update', $list->id) }}" method="POST">
+        <form action="{{ route('lists.update', $list->id) }}" method="POST" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
             @csrf
-            @method('PUT')
+            @method('PATCH')
 
-            <div class="form-group">
-                <label for="name">List Name</label>
-                <input type="text" name="name" id="name" class="form-control" value="{{ $list->name }}">
+            <div class="mb-4">
+                <label for="name" class="block text-gray-700 text-sm font-bold mb-2">List Name</label>
+                <input type="text" name="name" id="name" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" value="{{ $list->name }}">
             </div>
 
-            <div class="form-group">
-                <label for="description">List Description</label>
-                <textarea name="description" id="description" class="form-control">{{ $list->description }}</textarea>
+            <div class="mb-4">
+                <label for="description" class="block text-gray-700 text-sm font-bold mb-2">List Description</label>
+                <textarea name="description" id="description" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline h-48">{{ $list->description }}</textarea>
             </div>
 
-            <button type="submit" class="btn btn-primary">Update List</button>
+            <div class="flex items-center justify-between">
+                <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Update List</button>
+            </div>
         </form>
     </div>
-@endsection
+</x-app-layout>

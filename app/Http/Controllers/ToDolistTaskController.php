@@ -32,13 +32,11 @@ class ToDolistTaskController extends Controller
 
     public function update(Request $request, ToDolist $toDolist, Task $task)
     {
-        $request->validate([
-            'name' => 'required',
-        ]);
 
-        // Logic for updating the task
-        $task->update($request->all());
+        $completed = $request->input('completed') == '1';
+        $task->update(['completed' => $completed]);
 
+        $tasks = $toDolist->tasks;
         return redirect()->route('list.tasks', $toDolist);
     }
 

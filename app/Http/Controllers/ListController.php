@@ -22,7 +22,7 @@ class ListController extends Controller
      */
     public function create()
     {
-
+        return view('lists.create');
     }
 
     /**
@@ -30,7 +30,15 @@ class ListController extends Controller
      */
     public function store(Request $request)
     {
-        return $request->collect('task');
+        // make descriprion not required
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'required|string',
+        ]);
+    
+        ToDolist::create(['name' => $request->name, 'description' => $request->description, 'user_id' => auth()->id()]);
+    
+        return redirect()->route('lists');
     }
 
     /**
@@ -46,7 +54,7 @@ class ListController extends Controller
      */
     public function edit(ToDolist $toDolist)
     {
-        //
+        return view('listsEdit',['list' => $toDolist]);
     }
 
     /**
@@ -54,7 +62,9 @@ class ListController extends Controller
      */
     public function update(Request $request, ToDolist $toDolist)
     {
-        return $toDolist;
+        $toDolist->update(["name" => $request->name,
+        "description" => $request->description]);
+        return redirect()->route('lists');
     }
 
     /**

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class ToDoList extends Model
 {
     use HasFactory;
-    public   $gaudrded = [];
+    protected $fillable = ['name', 'user_id', 'description'];
     public function user(){
         return $this->belongsTo(User::class);
     }

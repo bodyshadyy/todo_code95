@@ -1,5 +1,5 @@
 <div>     
-    <form class="flex items-center" action"/dashboard" method="POST">
+    <form class="flex items-center" action"/lists" method="POST">
         @csrf
        
         <x-form-input name="name" id="name" placeholder="hello"/>

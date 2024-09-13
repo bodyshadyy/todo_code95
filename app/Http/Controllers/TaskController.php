@@ -35,7 +35,7 @@ class TaskController extends Controller
     }
 
     // Mark a task as completed
-    public function update(Request $request, Task $task)
+    public function update(Request $request, Task $task): mixed|RedirectResponse
     {
         $completed = $request->input('completed') == '1';
 
