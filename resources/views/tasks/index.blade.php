@@ -5,7 +5,7 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
     <!-- Task Form -->
-    <form action="{{ route('tasks.store') }}" method="POST">
+    <form action="{{ route('list.tasks.store', $toDolist) }}" method="POST" class="mb-4">
         @csrf
         <div class="flex mb-4">
         <input type="text"  class="flex-grow px-3 py-2 border rounded-l-lg focus:outline-none focus:ring-2 focus:ring-blue-500"  name="name" placeholder="New Task">

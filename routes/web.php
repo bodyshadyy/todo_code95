@@ -6,20 +6,22 @@ use App\Http\Controllers\TaskController;
 use App\Http\Controllers\ListController;
 use App\Models\ToDolist;
 use App\Models\Task;
+use App\Http\Controllers\ToDolistTaskController;
 
-Route::get('/tasks', [TaskController::class, 'index'])->name('tasks.index');
+Route::get('list/taskadsadsas', function(ToDolist $toDolist){
+    $tasks = $toDolist->tasks()->get();
+    return view('tasks.index', compact('tasks'));
+})->name('tasks.index');
 Route::post('/tasks', [TaskController::class, 'store'])->name('tasks.store');
-Route::patch('/tasks/{task}', [TaskController::class, 'update'])->name('tasks.update');
+Route::patch('/tasks/{task}',[TaskController::class, 'update'])->name('tasks.update');
 Route::delete('/tasks/{task}', [TaskController::class, 'destroy'])->name('tasks.destroy');
 
-Route::get('/ToDolist/{ToDolist}', function ( ToDolist $todolist)  { 
-    return  $todolist;
-});
 
+Route::get('/list/{toDolist}/tasks',  [ToDolistTaskController::class, 'showTasks'])->name('list.tasks');
+Route::post('/list/{toDolist}/tasks', [ToDolistTaskController::class, 'store'])->name('list.tasks.store');
+Route::patch('/list/{toDolist}/tasks/{task}', [ToDolistTaskController::class, 'update'])->name('list.tasks.update');
+Route::delete('/list/{toDolist}/tasks/{task}', [ToDolistTaskController::class, 'destroy'])->name('list.tasks.destroy');
 
-Route::get('/list/{ToDolist}/tasks', function ( ToDolist $todolist)  { 
-    return  $todolist;
-});
 
 
 Route::get('/', function () {
