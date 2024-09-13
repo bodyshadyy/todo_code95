@@ -6,6 +6,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Models\PomodoroSettings;
+use App\Models\ToDoList;
 
 class User extends Authenticatable
 {
@@ -47,4 +49,8 @@ class User extends Authenticatable
     public function toDoLists(){
         return $this->hasMany(ToDoList::class);
     }
+    public function pomodoroSettings(){
+        return $this->hasOne(PomodoroSettings::class);
+    }
+    
 }
