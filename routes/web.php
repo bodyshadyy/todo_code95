@@ -8,9 +8,11 @@ use App\Models\ToDolist;
 use App\Models\Task;
 use App\Http\Controllers\ToDolistTaskController;
 
-Route::get('list/taskadsadsas', function(ToDolist $toDolist){
-    $tasks = $toDolist->tasks()->get();
-    return view('tasks.index', compact('tasks'));
+Route::get('list/taskadsadsas', function(){
+    $toDolist = ToDolist::find(session('toDolistId'));  
+    $tasks = $toDolist->tasks;
+    return redirect()->route('list.tasks', $toDolist);
+    
 })->name('tasks.index');
 // Route::post('/tasks', [TaskController::class, 'store'])->name('tasks.store');
 // Route::patch('/tasks/{task}',[TaskController::class, 'update'])->name('tasks.update');
@@ -21,7 +23,6 @@ Route::get('/list/{toDolist}/tasks',  [ToDolistTaskController::class, 'showTasks
 Route::post('/list/{toDolist}/tasks', [ToDolistTaskController::class, 'store'])->name('list.tasks.store');
 Route::patch('/list/{toDolist}/tasks/{task}', [ToDolistTaskController::class, 'update'])->name('list.tasks.update');
 Route::delete('/list/{toDolist}/tasks/{task}', [ToDolistTaskController::class, 'destroy'])->name('list.tasks.destroy');
-Route::post('/list/{toDolist}/tasks/pomoplus', [ToDolistTaskController::class, 'updatePomoCount'])->name('updatePomoCount');
 
 
 Route::get('/', function () {
@@ -34,9 +35,9 @@ Route::get('/', function () {
 //     ]);
 // })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/pomodoro', function () {
-    return view('pomodoro');
-})->middleware(['auth', 'verified'])->name('pomodora');
+// Route::get('/pomodoro', function () {
+//     return view('pomodoro');
+// })->middleware(['auth', 'verified'])->name('pomodora');
 
 Route::get('/lists', [ListController::class,'index'])->middleware(['auth', 'verified'])->name('lists');
 Route::post('/lists', [ListController::class,'store'])->middleware(['auth', 'verified'])->name('lists.store');

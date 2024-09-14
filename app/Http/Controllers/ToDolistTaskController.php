@@ -12,6 +12,8 @@ class ToDolistTaskController extends Controller
     {
         // Retrieve the tasks associated with the to-do list
         $tasks = $toDolist->tasks()->get();
+        // Add the to-do list ID to the local storage
+        session(['toDolistId' => $toDolist->id]);
 
         // Return the view with the tasks and the to-do list
         return view('tasks.index', compact('tasks', 'toDolist'));
@@ -47,11 +49,5 @@ class ToDolistTaskController extends Controller
 
         return redirect()->route('list.tasks', $toDolist);
     }
-    public function updatePomoCount(ToDolist $toDolist)
-    {
-        $toDolist->increment('pomo_count', 1);
-        $tasks = $toDolist->tasks()->get();
 
-        return redirect()->route('list.tasks', $tasks);
-    }
 }

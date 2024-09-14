@@ -18,9 +18,6 @@
                     <x-nav-link :href="route('lists')" :active="request()->routeIs('lists')">
                         {{ __('lists') }}
                     </x-nav-link>
-                    <x-nav-link href="pomodoro" >
-                      pomodoro
-                    </x-nav-link>
                 </div>
             </div>
 
