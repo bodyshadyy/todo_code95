@@ -7,6 +7,7 @@ use App\Http\Controllers\ListController;
 use App\Models\ToDolist;
 use App\Models\Task;
 use App\Http\Controllers\ToDolistTaskController;
+use App\Http\Controllers\PomodoroSettingsController;
 
 Route::get('list/taskadsadsas', function(){
     $toDolist = ToDolist::find(session('toDolistId'));  
@@ -52,6 +53,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-
+Route::get('/settings', [PomodoroSettingsController::class, 'edit'])->name('pomodoro.settings.edit');
+Route::put('/settings', [PomodoroSettingsController::class, 'update'])->name('pomodoro.settings.update');
 
 require __DIR__.'/auth.php';
