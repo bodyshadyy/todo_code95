@@ -1,6 +1,5 @@
-<x-app-layout>
-    <div class="container mx-auto p-4">
-        <h1 class="text-2xl font-bold mb-4">Pomodoro Timer</h1>
+<div class="container mx-auto p-4">
+        <h1 class="text-2xl font-bold mb-4">Pomodoro Timer {{$toDolist->pomo_count}}</h1>
 
         <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
         <p>Pomodoro Count: <span id="pomodoroCount">0</span></p>
@@ -14,8 +13,9 @@
                 <button id="long-break" class="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline ml-2" onclick="startLongBreak()">Long Break</button>
             </div>
         </div>
-    </div>
-    @php
+</div>
+
+@php
         $pomodoroSettings = DB::table('pomodoro_settings')->first();
         $workDuration = $pomodoroSettings->work_duration ?? 25;
         $shortBreakDuration = $pomodoroSettings->short_break_duration ?? 5;
@@ -56,7 +56,6 @@
             }else if(currentMode === 'short-break'|| currentMode === 'long-break'){
                 currentMode = 'work';
                 timeLeft = workDuration * 60;
-
                 pomodorasCompleted++;
                 document.getElementById('pomodoroCount').textContent = pomodorasCompleted;
             }
@@ -113,4 +112,5 @@
 
         updateTimerDisplay();
     </script>
+
 </x-app-layout>

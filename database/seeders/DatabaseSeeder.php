@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Database\Seeder;
 use App\Models\ToDoList;
 use App\Models\Task;
+use App\Models\PomodoroSettings;
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -21,6 +22,10 @@ class DatabaseSeeder extends Seeder
         Task::factory(5)->create([
             'to_do_list_id' => 1,
         ]);
+        PomodoroSettings::factory(1)->create([
+            'user_id' => 1,
+        ]); 
+
 
         // User::factory()->create([
         //     'name' => 'Test User',

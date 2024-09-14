@@ -17,6 +17,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->boolean('completed')->default(false);
             $table->foreignId('user_id');
+            $table->integer('pomo_count')->default(0);
             $table->timestamps();
         });
     }

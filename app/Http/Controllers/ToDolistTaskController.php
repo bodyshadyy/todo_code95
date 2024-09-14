@@ -47,4 +47,11 @@ class ToDolistTaskController extends Controller
 
         return redirect()->route('list.tasks', $toDolist);
     }
+    public function updatePomoCount(ToDolist $toDolist)
+    {
+        $toDolist->increment('pomo_count', 1);
+        $tasks = $toDolist->tasks()->get();
+
+        return redirect()->route('list.tasks', $tasks);
+    }
 }

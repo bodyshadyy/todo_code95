@@ -21,7 +21,7 @@ Route::get('/list/{toDolist}/tasks',  [ToDolistTaskController::class, 'showTasks
 Route::post('/list/{toDolist}/tasks', [ToDolistTaskController::class, 'store'])->name('list.tasks.store');
 Route::patch('/list/{toDolist}/tasks/{task}', [ToDolistTaskController::class, 'update'])->name('list.tasks.update');
 Route::delete('/list/{toDolist}/tasks/{task}', [ToDolistTaskController::class, 'destroy'])->name('list.tasks.destroy');
-
+Route::post('/list/{toDolist}/tasks/pomoplus', [ToDolistTaskController::class, 'updatePomoCount'])->name('updatePomoCount');
 
 
 Route::get('/', function () {
@@ -44,6 +44,7 @@ Route::patch('/lists/{toDolist}', [ListController::class,'update'])->middleware(
 Route::delete('/lists/{toDolist}', [ListController::class,'destroy'])->middleware(['auth', 'verified'])->name('lists.destroy');
 Route::get('/lists/{toDolist}/edit', [ListController::class,'edit'])->middleware(['auth', 'verified'])->name('lists.edit'); 
 Route::get('/lists/create', [ListController::class,'create'])->middleware(['auth', 'verified'])->name('lists.create');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
