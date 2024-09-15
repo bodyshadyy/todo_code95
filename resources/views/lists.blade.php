@@ -37,19 +37,21 @@
                                 <td class="border px-4 py-2">{{ $todolist->completed ? 'Yes' : 'No' }}</td>
                                 <td class="border px-4 py-2">{{ $todolist->created_at }}</td>
                                 <td class="border px-4 py-2 text-blue-600">   
-     <form action="{{ route('lists.edit',  $todolist) }}" method="GET">
+    <form action="{{ route('lists.edit',  $todolist) }}" method="GET" class="inline">
         @csrf
         @method('GET')
-        <button type="submit" class="text-blue-500  bg-transparent border-none p-0 hover:text-blue-700 cursor-pointer">
+        <button type="submit" class="text-blue-500 bg-transparent border-none p-0 hover:text-blue-700 cursor-pointer">
             Edit
         </button>
     </form>
-    <form action="{{ route('lists.destroy',  $todolist) }}" method="POST">
+    <form action="{{ route('lists.destroy',  $todolist) }}" method="POST" class="inline">
         @csrf
         @method('DELETE')
-        <button type="submit" class="text-red-500  bg-transparent border-none p-0 hover:text-red-700 cursor-pointer">
+        <button type="submit" class="text-red-500 bg-transparent border-none p-0 hover:text-red-700 cursor-pointer">
            <x-deleteIcon/>
         </button>
+    </form>
+                                </td>
 </td>
                                 
                             </tr>

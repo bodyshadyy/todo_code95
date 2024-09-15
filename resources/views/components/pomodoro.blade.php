@@ -1,9 +1,9 @@
 @php
-        $pomodoroSettings = DB::table('pomodoro_settings')->where("user_id",Auth::id());
-        $workDuration = $pomodoroSettings->value("pomodoro_time") ?? 25;
-        $shortBreakDuration = $pomodoroSettings->value("short_break_time") ?? 5;
-        $longBreakDuration = $pomodoroSettings->value("long_break_time") ?? 15;
-        $interval = $pomodoroSettings->value("long_break_interval") ?? 4;
+        $pomodoroSettings = DB::table('pomodoro_settings')->where("user_id",Auth::id())->get()->first();
+        $workDuration = $pomodoroSettings->pomodoro_time ?? 25;
+        $shortBreakDuration = $pomodoroSettings->short_break_time ?? 5;
+        $longBreakDuration = $pomodoroSettings->long_break_time ?? 15;
+        $interval = $pomodoroSettings->long_break_interval ?? 4;
  @endphp
 <div class="container mx-auto p-4">
         <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
