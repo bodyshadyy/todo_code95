@@ -18,7 +18,9 @@ Route::get('list/taskadsadsas', function(){
 // Route::post('/tasks', [TaskController::class, 'store'])->name('tasks.store');
 // Route::patch('/tasks/{task}',[TaskController::class, 'update'])->name('tasks.update');
 // Route::delete('/tasks/{task}', [TaskController::class, 'destroy'])->name('tasks.destroy');
-
+Route::get('/test', function () {
+    return view('test');
+})->name('test.route');
 
 Route::get('/list/{toDolist}/tasks',  [ToDolistTaskController::class, 'showTasks'])->name('list.tasks');
 Route::post('/list/{toDolist}/tasks', [ToDolistTaskController::class, 'store'])->name('list.tasks.store');
