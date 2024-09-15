@@ -34,7 +34,7 @@
                             <tr>
                                 <td class="border px-4 py-2"><a href={{route("list.tasks",$todolist)}}>{{ $todolist->name }} </a></td>
                                 <td class="border px-4 py-2">{{ $todolist->description }}</td>
-                                <td class="border px-4 py-2">{{ $todolist->completed }}</td>
+                                <td class="border px-4 py-2">{{ $todolist->completed ? 'Yes' : 'No' }}</td>
                                 <td class="border px-4 py-2">{{ $todolist->created_at }}</td>
                                 <td class="border px-4 py-2 text-blue-600">   
      <form action="{{ route('lists.edit',  $todolist) }}" method="GET">
@@ -44,6 +44,12 @@
             Edit
         </button>
     </form>
+    <form action="{{ route('lists.destroy',  $todolist) }}" method="POST">
+        @csrf
+        @method('DELETE')
+        <button type="submit" class="text-red-500  bg-transparent border-none p-0 hover:text-red-700 cursor-pointer">
+           <x-deleteIcon/>
+        </button>
 </td>
                                 
                             </tr>

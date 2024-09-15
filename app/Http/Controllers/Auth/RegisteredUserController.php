@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use App\Models\ToDolist;
+use App\Models\PomodoroSettings;
 
 class RegisteredUserController extends Controller
 {
@@ -44,7 +46,18 @@ class RegisteredUserController extends Controller
         event(new Registered($user));
 
         Auth::login($user);
+        $firstList=ToDolist::create([
+            'name' => 'My first list',
+            'description' => 'This is my first list click on thee name to see tasks',
+            'user_id' => $user->id
+        ]);
+        session(['toDolistId' => $firstList->id]);
+        $pomodoroSettings = PomodoroSettings::create([
 
+            'user_id' => $user->id
+        ]);
+
+        
         return redirect(route('lists', absolute: false));
     }
 }

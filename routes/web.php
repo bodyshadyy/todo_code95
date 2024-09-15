@@ -30,7 +30,7 @@ Route::delete('/list/{toDolist}/tasks/{task}', [ToDolistTaskController::class, '
 
 Route::get('/', function () {
     return view('welcome');
-})->middleware(['auth', 'verified'])->name('welcome');
+})->name('welcome');
 
 // Route::get('/list', function () {
 //     return view('list', [
