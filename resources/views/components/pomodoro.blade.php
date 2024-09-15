@@ -15,6 +15,7 @@
 
                 <button id="short-break" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline ml-2" onclick="startShortBreak()" >Short Break</button>
                 <button id="long-break" class="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline ml-2" onclick="startLongBreak()">Long Break</button>
+                <button id="long-break" class="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline ml-2" onclick="test()">Long Break</button>
             </div>
         </div>
 </div>
@@ -32,13 +33,18 @@
         let pomodorasCompleted =  {{$toDolist->pomo_count}};
 
         const timerDisplay = document.getElementById('timer-display');
+
+
+        function test(){
+            timeLeft = 5;
+        }
         function updateTimerDisplay() {
             const minutes = Math.floor(timeLeft / 60);
             const seconds = timeLeft % 60;
             timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
         }
         function switchMode(){
-            alert('Switching mode finished', currentMode);
+            // alert('Switching mode finished', currentMode);
             if(currentMode === 'work'){
 
                 if(pomodorasCompleted% interval ==0){
@@ -50,6 +56,7 @@
                     timeLeft = shortBreakDuration * 60;
                     // timeLeft = 5;
                 }
+                window.open("http://todo.test/focus", "_blank");
 
    
             }else if(currentMode === 'short-break'|| currentMode === 'long-break'){
@@ -57,6 +64,7 @@
                 timeLeft = workDuration * 60;
                 {{ $toDolist->increment("pomo_count",1); }}
                 pomodorasCompleted++;
+                window.open("http://todo.test/break", "_blank");
                 document.getElementById('pomodoroCount').textContent = pomodorasCompleted;
             }
             updateTimerDisplay();
@@ -96,7 +104,7 @@
         function startShortBreak() {
             clearInterval(timer);
             isRunning = false;
-            timeLeft = shortBreakDuration * 60; // 5 minutes in seconds
+             timeLeft = shortBreakDuration * 60; // 5 minutes in seconds
             currentMode = 'short-break';
             updateTimerDisplay();
             startTimer();

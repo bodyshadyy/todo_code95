@@ -27,6 +27,13 @@ Route::post('/list/{toDolist}/tasks', [ToDolistTaskController::class, 'store'])-
 Route::patch('/list/{toDolist}/tasks/{task}', [ToDolistTaskController::class, 'update'])->name('list.tasks.update');
 Route::delete('/list/{toDolist}/tasks/{task}', [ToDolistTaskController::class, 'destroy'])->name('list.tasks.destroy');
 
+Route::get('/break',function(){
+    return view('break');
+}
+)->name('breakMessage');  
+Route::get('/focus', function () {
+    return view('focus');
+})->name('focus');
 
 Route::get('/', function () {
     return view('welcome');
