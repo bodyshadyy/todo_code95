@@ -15,7 +15,7 @@
 
                 <button id="short-break" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline ml-2" onclick="startShortBreak()" >Short Break</button>
                 <button id="long-break" class="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline ml-2" onclick="startLongBreak()">Long Break</button>
-                <button id="long-break" class="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline ml-2" onclick="test()">Long Break</button>
+                <button id="long-break" class="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline ml-2" onclick="test()">test</button>
             </div>
         </div>
 </div>
@@ -71,11 +71,13 @@
         }
 
         function startTimer() {
+            const currentDate = new Date();
+            const timerStart = currentDate.getTime();
             if (!isRunning) {
             document.getElementById('start').textContent = 'Pause';
             isRunning = true;
             timer = setInterval(() => {
-                if (timeLeft > 0) {
+                if (timeLeft > 0 && ) {
                 timeLeft--;
                 updateTimerDisplay();
                 } else {

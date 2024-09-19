@@ -9,8 +9,14 @@ use App\Models\Task;
 use App\Http\Controllers\ToDolistTaskController;
 use App\Http\Controllers\PomodoroSettingsController;
 
+use App\Http\Middleware\CheckToDoListOwner;
+
 Route::get('list/taskadsadsas', function(){
-    $toDolist = ToDolist::find(session('toDolistId'));  
+    $toDolist = ToDolist::find(session('toDolistId'));
+
+    if (is_null($toDolist)) {
+        $toDolist = auth()->user()->toDoLists()->latest()->first();
+    }
     $tasks = $toDolist->tasks;
     return redirect()->route('list.tasks', $toDolist);
     
@@ -19,10 +25,11 @@ Route::get('list/taskadsadsas', function(){
 // Route::patch('/tasks/{task}',[TaskController::class, 'update'])->name('tasks.update');
 // Route::delete('/tasks/{task}', [TaskController::class, 'destroy'])->name('tasks.destroy');
 Route::get('/test', function () {
-    return view('test');
+    session()->forget('toDolistId');
+    return session()->all();
 })->name('test.route');
 
-Route::get('/list/{toDolist}/tasks',  [ToDolistTaskController::class, 'showTasks'])->name('list.tasks');
+Route::get('/list/{toDolist}/tasks',  [ToDolistTaskController::class, 'showTasks'])->name('list.tasks')->middleware(CheckToDoListOwner::class);
 Route::post('/list/{toDolist}/tasks', [ToDolistTaskController::class, 'store'])->name('list.tasks.store');
 Route::patch('/list/{toDolist}/tasks/{task}', [ToDolistTaskController::class, 'update'])->name('list.tasks.update');
 Route::delete('/list/{toDolist}/tasks/{task}', [ToDolistTaskController::class, 'destroy'])->name('list.tasks.destroy');
